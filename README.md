@@ -12,7 +12,7 @@ iOS无限循环轮播图（只使用三个imageView）
 
 本damo重点对项目中的细节做了调整和优化，供大家产考和指导。
 
-///
+```
 // 添加观察者：监控offset的变化，进行从新计算下标的方式
 YSLoopBanner *loop1 = [[YSLoopBanner alloc] initWithFrame:CGRectMake(0, 100, ScreenWidth, 260) scrollDuration:3.f];
 [self.view addSubview:loop1];
@@ -22,7 +22,8 @@ loop1.normalColor = [UIColor orangeColor];
 loop1.clickAction = ^(NSInteger index) {
 NSLog(@"curIndex: %ld", index);
 };
-
+```
+```
 // 取消添加观察者
 // 通过系统方法（scrollViewDidScroll）：监控offset的变化，进行从新计算下标的方式
 // 达到精简代码的方式，实现同样的效果
@@ -34,6 +35,6 @@ loop.normalColor = [UIColor yellowColor];
 loop.clickAction = ^(NSInteger index) {
 NSLog(@"curIndex: %ld", index);
 };
-///
+```
 
 http://www.jianshu.com/p/84180911c70c 原来作者来自：
