@@ -11,7 +11,8 @@ iOS无限循环轮播图（只使用三个imageView）
 我新做的循环轮播图只需要使用3个imagView控件，并且支持定时器自动滚动播放。大致逻辑：在scrollView上添加3个imageView，每滚动一页，通过KVO观察scrollView的contentOffset的变化，判断需要添加的3张图片的索引号，并重置中间的imageView为当前页（中间的imageView永远都是当前页）。需要注意的是，临界值的判断。
 
 本damo重点对项目中的细节做了调整和优化，供大家产考和指导。
-,,,
+
+///
 // 添加观察者：监控offset的变化，进行从新计算下标的方式
 YSLoopBanner *loop1 = [[YSLoopBanner alloc] initWithFrame:CGRectMake(0, 100, ScreenWidth, 260) scrollDuration:3.f];
 [self.view addSubview:loop1];
@@ -33,5 +34,6 @@ loop.normalColor = [UIColor yellowColor];
 loop.clickAction = ^(NSInteger index) {
 NSLog(@"curIndex: %ld", index);
 };
-,,,
+///
+
 http://www.jianshu.com/p/84180911c70c 原来作者来自：
