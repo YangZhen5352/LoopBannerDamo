@@ -1,6 +1,6 @@
 LoopBannerDamo
 
-##iOS无限循环轮播图（只使用三个imageView）
+iOS无限循环轮播图（只使用三个imageView）
 
 * 以前循环轮播图的逻辑：
 
