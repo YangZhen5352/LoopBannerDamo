@@ -17,6 +17,7 @@
 		002E7AB51EADFD550080DC2F /* LoopBannerDamoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 002E7AB41EADFD550080DC2F /* LoopBannerDamoTests.m */; };
 		002E7AC01EADFD550080DC2F /* LoopBannerDamoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 002E7ABF1EADFD550080DC2F /* LoopBannerDamoUITests.m */; };
 		002E7AD01EADFD630080DC2F /* YSLoopBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 002E7ACF1EADFD630080DC2F /* YSLoopBanner.m */; };
+		009840961EAEF14500B216DE /* YYLoopBanner_Scroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 009840951EAEF14500B216DE /* YYLoopBanner_Scroll.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		002E7AC11EADFD550080DC2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		002E7ACE1EADFD630080DC2F /* YSLoopBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSLoopBanner.h; sourceTree = "<group>"; };
 		002E7ACF1EADFD630080DC2F /* YSLoopBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSLoopBanner.m; sourceTree = "<group>"; };
+		009840941EAEF14500B216DE /* YYLoopBanner_Scroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYLoopBanner_Scroll.h; sourceTree = "<group>"; };
+		009840951EAEF14500B216DE /* YYLoopBanner_Scroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYLoopBanner_Scroll.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +155,8 @@
 			children = (
 				002E7ACE1EADFD630080DC2F /* YSLoopBanner.h */,
 				002E7ACF1EADFD630080DC2F /* YSLoopBanner.m */,
+				009840941EAEF14500B216DE /* YYLoopBanner_Scroll.h */,
+				009840951EAEF14500B216DE /* YYLoopBanner_Scroll.m */,
 			);
 			path = LoopBanner;
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 			files = (
 				002E7AA51EADFD550080DC2F /* LoopBannerDamo.xcdatamodeld in Sources */,
 				002E7A9F1EADFD550080DC2F /* ViewController.m in Sources */,
+				009840961EAEF14500B216DE /* YYLoopBanner_Scroll.m in Sources */,
 				002E7A9C1EADFD550080DC2F /* AppDelegate.m in Sources */,
 				002E7A991EADFD550080DC2F /* main.m in Sources */,
 				002E7AD01EADFD630080DC2F /* YSLoopBanner.m in Sources */,
@@ -536,6 +542,7 @@
 				002E7AC61EADFD550080DC2F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		002E7AC71EADFD550080DC2F /* Build configuration list for PBXNativeTarget "LoopBannerDamoTests" */ = {
 			isa = XCConfigurationList;
@@ -544,6 +551,7 @@
 				002E7AC91EADFD550080DC2F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		002E7ACA1EADFD550080DC2F /* Build configuration list for PBXNativeTarget "LoopBannerDamoUITests" */ = {
 			isa = XCConfigurationList;
@@ -552,6 +560,7 @@
 				002E7ACC1EADFD550080DC2F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

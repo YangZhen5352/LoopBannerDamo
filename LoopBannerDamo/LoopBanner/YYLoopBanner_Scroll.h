@@ -1,14 +1,10 @@
 //
-//  YSLoopBanner.h
-//  TestLoopScrollView
+//  YYLoopBanner_Scroll.h
+//  LoopBannerDamo
 //
-//  Created by zys on 2016/10/13.
-//  Copyright © 2016年 张永帅. All rights reserved.
+//  Created by edz on 2017/4/25.
+//  Copyright © 2017年 edz. All rights reserved.
 //
-
-/** 
- *  Infinite loop banner：only use three imageViews 
- */
 
 #import <UIKit/UIKit.h>
 
@@ -17,7 +13,7 @@
 
 #define Margin 2
 
-@interface YSLoopBanner : UIView
+@interface YYLoopBanner_Scroll : UIView
 
 /// click action
 @property (nonatomic, copy) void (^clickAction) (NSInteger curIndex) ;
@@ -31,7 +27,5 @@
 /// normalColor
 @property (nonatomic, copy) UIColor *normalColor;
 
-
 - (instancetype)initWithFrame:(CGRect)frame scrollDuration:(NSTimeInterval)duration;
-
 @end

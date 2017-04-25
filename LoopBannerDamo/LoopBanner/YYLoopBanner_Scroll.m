@@ -1,14 +1,14 @@
 //
-//  YSLoopBanner.m
-//  TestLoopScrollView
+//  YYLoopBanner_Scroll.m
+//  LoopBannerDamo
 //
-//  Created by zys on 2016/10/13.
-//  Copyright © 2016年 张永帅. All rights reserved.
+//  Created by edz on 2017/4/25.
+//  Copyright © 2017年 edz. All rights reserved.
 //
 
-#import "YSLoopBanner.h"
+#import "YYLoopBanner_Scroll.h"
 
-@interface YSLoopBanner () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
+@interface YYLoopBanner_Scroll ()<UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIPageControl *pageControl;
@@ -24,10 +24,10 @@
 /// scroll duration
 @property (nonatomic, assign) NSTimeInterval scrollDuration;
 
+
 @end
 
-@implementation YSLoopBanner
-
+@implementation YYLoopBanner_Scroll
 
 #pragma mark - 初始化
 - (instancetype)initWithFrame:(CGRect)frame scrollDuration:(NSTimeInterval)duration
@@ -36,8 +36,6 @@
         
         // 滚动时间
         self.scrollDuration = 0.f;
-        // 添加观察者
-        [self addObservers];
         // 设置界面
         [self setupViews];
         // 如果用户设置的滚动时间大于0.0秒的时候：调用定时器
@@ -53,18 +51,16 @@
     }
     return self;
 }
-// 设置frame
+#pragma mark - 设置frame
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.scrollDuration = 0.f;
-        [self addObservers];
         [self setupViews];
     }
     
     return self;
 }
 
-#pragma mark - setupViews
 - (void)setupViews {
     [self.scrollView addSubview:self.leftImageView];
     [self.scrollView addSubview:self.middleImageView];
@@ -89,23 +85,8 @@
     self.middleImageView.frame  = CGRectMake(imageWidth * 1 + Margin*2, 0, imageWidth, imageHeight);
     self.rightImageView.frame   = CGRectMake(imageWidth * 2 + Margin*3, 0, imageWidth, imageHeight);
     self.scrollView.contentSize = CGSizeMake(imageWidth * 3 + Margin * 6, 0);
-
+    
     [self setScrollViewContentOffsetCenter];
-}
-
-#pragma mark - kvo
-- (void)addObservers {
-    [self.scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
-}
-- (void)removeObservers {
-    [self.scrollView removeObserver:self forKeyPath:@"contentOffset"];
-}
-// 注册观察者之后，系统发现观察的值发生了变化，系统会自动调用此方法：进行观察回调方法
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
-    // 发生变化的key值，发生变化，进行调用
-    if ([keyPath isEqualToString:@"contentOffset"]) {
-        [self caculateCurIndex];
-    }
 }
 
 #pragma mark - setters
@@ -125,7 +106,7 @@
             self.pageControl.currentPage = 0;
             self.pageControl.hidden = NO;
             
-        // 无图片
+            // 无图片
         } else {
             self.pageControl.hidden = YES;
             [self.leftImageView removeFromSuperview];
@@ -144,8 +125,6 @@
         NSInteger leftIndex = (curIndex + imageCount - 1) % imageCount;
         NSInteger rightIndex= (curIndex + 1) % imageCount;
         
-        // TODO: if need use image from server, can import SDWebImage SDK and modify the codes below.
-        // fill image
         self.leftImageView.image = [UIImage imageNamed:self.imageURLStrings[leftIndex]];
         self.middleImageView.image = [UIImage imageNamed:self.imageURLStrings[curIndex]];
         self.rightImageView.image = [UIImage imageNamed:self.imageURLStrings[rightIndex]];
@@ -165,25 +144,6 @@
 {
     _normalColor = normalColor;
     _pageControl.pageIndicatorTintColor = (_normalColor) ? (_normalColor) : (NormalColor);
-}
-
-#pragma mark - 计算当前的下标
-- (void)caculateCurIndex {
-    if (self.imageURLStrings && self.imageURLStrings.count > 0) {
-        // 滑动的偏移量
-        CGFloat pointX = self.scrollView.contentOffset.x;
-        
-        //判断临界值，第一个和第三个ImageView的contentoffset
-        CGFloat criticalValue = 0.2f;
-        
-        // 向右滚动，判断正确临界值
-        if (pointX > 2 * CGRectGetWidth(self.scrollView.bounds) - criticalValue) {
-            self.curIndex = (self.curIndex + 1) % self.imageURLStrings.count;
-        } else if (pointX < criticalValue) {
-            // 向左滚动，判断左临界值
-            self.curIndex = (self.curIndex + self.imageURLStrings.count - 1) % self.imageURLStrings.count;
-        }
-    }
 }
 
 #pragma mark - 图片点击的手势
@@ -213,16 +173,26 @@
 
 
 #pragma mark - UIScrollViewDelegate
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    // 将要开始拖拽的时候：注销定时器
-    if (self.imageURLStrings.count > 1) {
-        [self.scrollTimer setFireDate:[NSDate distantFuture]];
-    }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self caculateCurIndex];
 }
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    // 拖拽结束的时候：打开定时器
-    if (self.imageURLStrings.count > 1) {
-        [self.scrollTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:self.scrollDuration]];
+// 计算当前的下标
+- (void)caculateCurIndex {
+    if (self.imageURLStrings && self.imageURLStrings.count > 0) {
+        // 滑动的偏移量
+        CGFloat pointX = self.scrollView.contentOffset.x;
+        
+        //判断临界值，第一个和第三个ImageView的contentoffset
+        CGFloat criticalValue = 0.2f;
+        
+        // 向右滚动，判断正确临界值
+        if (pointX > 2 * CGRectGetWidth(self.scrollView.bounds) - criticalValue) {
+            self.curIndex = (self.curIndex + 1) % self.imageURLStrings.count;
+        } else if (pointX < criticalValue) {
+            // 向左滚动，判断左临界值
+            self.curIndex = (self.curIndex + self.imageURLStrings.count - 1) % self.imageURLStrings.count;
+        }
     }
 }
 
@@ -282,12 +252,11 @@
     return _rightImageView;
 }
 - (void)dealloc {
-    // 清除观察者
-    [self removeObservers];
     // 清除定时器
     if (self.scrollTimer) {
         [self.scrollTimer invalidate];
         self.scrollTimer = nil;
     }
 }
+
 @end
